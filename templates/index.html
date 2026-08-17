@@ -1,8 +1,37 @@
-{% extends 'base.html' %}{% from '_cards.html' import cards %}
-{% block content %}<section class="hero container py-5"><div class="section-kicker">Today's briefing</div><h1>News worth bringing<br>to the table.</h1><p>Clear, current headlines from NBC News—collected in one calm place.</p></section>
-{% if featured %}<section class="container mb-5"><div class="section-heading"><span>Featured</span></div><article class="featured row g-0 overflow-hidden"><div class="col-lg-7"><img src="{{ featured.image_url or url_for('static', filename='images/fallback-news.svg') }}" alt="" fetchpriority="high" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/fallback-news.svg') }}'"></div><div class="col-lg-5 p-4 p-lg-5 d-flex flex-column justify-content-center"><div><span class="category">{{ featured.category }}</span><span class="time">{{ featured.published_at|relative_time }}</span></div><h2><a href="{{ url_for('main.article', slug=featured.slug) }}">{{ featured.title }}</a></h2><p class="excerpt">{{ featured.description|truncate(240) }}</p><div class="source mb-3">Source: NBC News</div><a class="btn btn-brand align-self-start" href="{{ url_for('main.article', slug=featured.slug) }}">Read story</a></div></article></section>{% endif %}
-<aside class="container mb-5 text-center" aria-label="Advertisement">
-  <script async="async" data-cfasync="false" src="https://pl30888379.effectivecpmnetwork.com/7f88a9ee4868920f2e77e151aa07b456/invoke.js"></script>
-  <div id="container-7f88a9ee4868920f2e77e151aa07b456"></div>
-</aside>
-<section class="container pb-5"><div class="section-heading d-flex justify-content-between"><span>Latest News</span><a href="{{ url_for('main.latest') }}">View all →</a></div>{{ cards(articles) }}</section>{% endblock %}
+{% extends 'base.html' %}
+{% from '_cards.html' import cards %}
+{% from '_ads.html' import banner_468, skyscraper_tall, skyscraper_short, native %}
+{% block content %}
+<section class="hero container py-5">
+  <div class="section-kicker">Today's briefing</div>
+  <h1>News worth bringing<br>to the table.</h1>
+  <p>Clear, current headlines from NBC News—collected in one calm place.</p>
+</section>
+<div class="container pb-5">
+  <div class="row g-4 news-layout">
+    <div class="col-12 col-lg-9">
+      {% if featured %}
+      <section class="mb-5">
+        <div class="section-heading"><span>Featured</span></div>
+        <article class="featured row g-0 overflow-hidden">
+          <div class="col-lg-7"><img src="{{ featured.image_url or url_for('static', filename='images/fallback-news.svg') }}" alt="" fetchpriority="high" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/fallback-news.svg') }}'"></div>
+          <div class="col-lg-5 p-4 d-flex flex-column justify-content-center"><div><span class="category">{{ featured.category }}</span><span class="time">{{ featured.published_at|relative_time }}</span></div><h2><a href="{{ url_for('main.article', slug=featured.slug) }}">{{ featured.title }}</a></h2><p class="excerpt">{{ featured.description|truncate(240) }}</p><div class="source mb-3">Source: NBC News</div><a class="btn btn-brand align-self-start" href="{{ url_for('main.article', slug=featured.slug) }}">Read story</a></div>
+        </article>
+      </section>
+      {% endif %}
+      <div class="ad-break ad-break-banner">{{ banner_468() }}</div>
+      <div class="ad-break-native">{{ native() }}</div>
+      <section>
+        <div class="section-heading d-flex justify-content-between"><span>Latest News</span><a href="{{ url_for('main.latest') }}">View all →</a></div>
+        {{ cards(articles) }}
+      </section>
+    </div>
+    <aside class="col-12 col-lg-3 ad-sidebar" aria-label="Sidebar advertisements">
+      <div class="ad-sidebar-inner">
+        {{ skyscraper_short() }}
+        {{ skyscraper_tall() }}
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}
