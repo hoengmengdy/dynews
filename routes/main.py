@@ -1,7 +1,7 @@
 import hmac
 from datetime import datetime, timezone
 from functools import wraps
-from flask import Blueprint, abort, current_app, flash, redirect, render_template, request, session, url_for, Response
+from flask import Blueprint, abort, current_app, flash, redirect, render_template, request, session, url_for, Response, send_from_directory
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired
@@ -133,3 +133,7 @@ def sitemap():
 @main.route("/robots.txt")
 def robots():
     return Response(f"User-agent: *\nAllow: /\nDisallow: /admin\nSitemap: {url_for('main.sitemap', _external=True)}\n", mimetype="text/plain")
+
+@main.route("/ads.txt")
+def ads_txt():
+    return send_from_directory(current_app.static_folder, "ads.txt", mimetype="text/plain")
