@@ -2,6 +2,7 @@ Flask>=3.0,<4
 Flask-SQLAlchemy>=3.1,<4
 Flask-Login>=0.6,<1
 Flask-WTF>=1.2,<2
+gunicorn>=23.0,<24
 feedparser>=6.0,<7
 requests>=2.31,<3
 python-dotenv>=1.0,<2
