@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title">
+  <title id="title">Dy News placeholder</title><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#d9d2c4"/><stop offset="1" stop-color="#9e9180"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#g)"/><circle cx="600" cy="338" r="145" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+  <text x="600" y="365" text-anchor="middle" fill="#fff" font-family="Georgia,serif" font-size="82" font-weight="bold">DY</text>
+</svg>

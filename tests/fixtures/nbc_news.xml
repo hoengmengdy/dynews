@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>NBC News Test Fixture</title>
+<item><title>World leaders meet for talks</title><link>https://www.nbcnews.com/test/world-talks</link><guid>fixture-1</guid><description>A short RSS-provided summary.</description><pubDate>Mon, 17 Aug 2026 08:00:00 GMT</pubDate><media:content url="https://example.com/world.jpg" type="image/jpeg"/></item>
+<item><title>Politics update from Washington</title><link>https://www.nbcnews.com/test/politics-update</link><guid>fixture-2</guid><description>Another short summary.</description><pubDate>not-a-real-date</pubDate></item>
+<item><title>Markets and households</title><link>https://www.nbcnews.com/test/markets</link><guid>fixture-3</guid><description><![CDATA[<p>News affecting household budgets.</p><img src="https://example.com/markets.jpg"/>]]></description><pubDate>Sun, 16 Aug 2026 12:30:00 GMT</pubDate></item>
+</channel></rss>
