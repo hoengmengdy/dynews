@@ -31,9 +31,16 @@ def default_database_url():
         return "sqlite://"
     return "sqlite:///news.db"
 
+
+def database_url():
+    """Select a database URL that is safe for the current runtime."""
+    if os.getenv("VERCEL"):
+        return default_database_url()
+    return env_value("DATABASE_URL", default_database_url()).replace("postgres://", "postgresql://", 1)
+
 class Config:
     SECRET_KEY = env_value("SECRET_KEY", "dev-only-change-me")
-    SQLALCHEMY_DATABASE_URI = env_value("DATABASE_URL", default_database_url()).replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = database_url()
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ADMIN_USERNAME = env_value("ADMIN_USERNAME", "admin")
     ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")
