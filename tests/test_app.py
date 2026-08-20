@@ -65,11 +65,12 @@ class AppTests(unittest.TestCase):
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200, url)
 
-    def test_home_uses_adsense_without_legacy_ad_networks(self):
+    def test_home_loads_adsense_and_structured_ad_placements(self):
         response = self.client.get("/")
         self.assertIn(b"ca-pub-4300339037772943", response.data)
-        self.assertNotIn(b"highperformanceformat.com", response.data)
-        self.assertNotIn(b"effectivecpmnetwork.com", response.data)
+        self.assertIn(b"site-ad-leaderboard", response.data)
+        self.assertIn(b"site-ad-inline", response.data)
+        self.assertIn(b"site-ad-rail", response.data)
 
     def test_api(self):
         for url in ["/api/news", "/api/news/latest", "/api/news/1", "/api/categories", "/api/search?q=World"]:

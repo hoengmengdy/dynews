@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% from '_cards.html' import cards %}
+{% from '_ads.html' import banner_468, skyscraper_tall, skyscraper_short, native %}
 {% block content %}
 <section class="hero container py-5">
   <div class="section-kicker">Today's briefing</div>
@@ -7,8 +8,8 @@
   <p>Clear, current headlines from NBC News—collected in one calm place.</p>
 </section>
 <div class="container pb-5">
-  <div class="row news-layout">
-    <div class="col-12 col-xl-10 mx-auto">
+  <div class="row g-4 news-layout">
+    <div class="col-12 col-lg-9">
       {% if featured %}
       <section class="mb-5">
         <div class="section-heading"><span>Featured</span></div>
@@ -18,11 +19,25 @@
         </article>
       </section>
       {% endif %}
+      <div class="site-ad site-ad-inline" aria-label="Advertisement">
+        <span class="ad-label">Advertisement</span>
+        {{ banner_468() }}
+      </div>
       <section>
         <div class="section-heading d-flex justify-content-between"><span>Latest News</span><a href="{{ url_for('main.latest') }}">View all →</a></div>
         {{ cards(articles) }}
       </section>
+      <div class="site-ad site-ad-native" aria-label="Sponsored content">
+        <span class="ad-label">Sponsored</span>
+        {{ native() }}
+      </div>
     </div>
+    <aside class="col-12 col-lg-3 ad-sidebar" aria-label="Advertisements">
+      <div class="ad-sidebar-inner">
+        <div class="site-ad site-ad-rail"><span class="ad-label">Advertisement</span>{{ skyscraper_short() }}</div>
+        <div class="site-ad site-ad-rail"><span class="ad-label">Advertisement</span>{{ skyscraper_tall() }}</div>
+      </div>
+    </aside>
   </div>
 </div>
 {% endblock %}

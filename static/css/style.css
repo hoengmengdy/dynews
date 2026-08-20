@@ -65,6 +65,54 @@
     text-align: center;
 }
 
+.site-ad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--card) 75%, transparent);
+}
+
+.ad-label {
+    display: block;
+    padding: .35rem .75rem .2rem;
+    color: var(--muted);
+    font: 500 .62rem/1.2 "DM Sans", sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.site-ad-leaderboard {
+    min-height: 118px;
+    margin-top: 1.25rem;
+    padding: .25rem 1rem .75rem;
+}
+
+.site-ad-inline {
+    min-height: 92px;
+    margin: 0 auto 3rem;
+    padding: .25rem 1rem .75rem;
+}
+
+.site-ad-native {
+    min-height: 140px;
+    margin-top: 3rem;
+    padding: .25rem 1rem 1rem;
+}
+
+.site-ad-rail {
+    width: 100%;
+    padding: .25rem .5rem .75rem;
+}
+
+.ad-mobile {
+    display: none;
+}
+
 .ad-break-banner {
     margin-block: 1rem;
     min-height: 60px;
@@ -193,6 +241,28 @@
 }
 
 @media (max-width: 767px) {
+    .ad-desktop {
+        display: none;
+    }
+
+    .ad-mobile {
+        display: block;
+    }
+
+    .site-ad-leaderboard {
+        min-height: 78px;
+        margin: .75rem .75rem 0;
+        padding-inline: 0;
+    }
+
+    .site-ad-inline {
+        display: none;
+    }
+
+    .site-ad-native {
+        margin-top: 2rem;
+    }
+
     .ad-slot-top:not(.ad-slot-top-mobile) {
         display: none;
     }
