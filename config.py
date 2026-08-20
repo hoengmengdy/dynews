@@ -43,8 +43,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = database_url()
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ADMIN_USERNAME = env_value("ADMIN_USERNAME", "admin")
-    ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")
-    ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH", "")
+    ADMIN_PASSWORD = env_value("ADMIN_PASSWORD", "")
+    ADMIN_PASSWORD_HASH = env_value("ADMIN_PASSWORD_HASH", "")
     RSS_TIMEOUT = int(env_value("RSS_TIMEOUT", "15"))
     RSS_CACHE_SECONDS = int(env_value("RSS_CACHE_SECONDS", "600"))
     SESSION_COOKIE_HTTPONLY = True

@@ -78,4 +78,13 @@ class AppTests(unittest.TestCase):
         self.assertEqual(self.client.post("/admin/article/1/delete", follow_redirects=True).status_code, 200)
         self.assertEqual(Article.query.count(), 0)
 
+    def test_plain_admin_password_takes_priority_over_stale_hash(self):
+        self.app.config["ADMIN_PASSWORD_HASH"] = "not-a-valid-current-hash"
+        response = self.client.post(
+            "/admin/login",
+            data={"username": "admin", "password": "secret"},
+            follow_redirects=True,
+        )
+        self.assertIn(b"Newsroom admin", response.data)
+
 if __name__ == "__main__": unittest.main()

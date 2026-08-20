@@ -80,7 +80,10 @@ def admin_login():
         user_ok = hmac.compare_digest(form.username.data, current_app.config["ADMIN_USERNAME"])
         password_hash = current_app.config.get("ADMIN_PASSWORD_HASH", "")
         password = current_app.config["ADMIN_PASSWORD"]
-        pass_ok = check_password_hash(password_hash, form.password.data) if password_hash else (bool(password) and hmac.compare_digest(form.password.data, password))
+        if password:
+            pass_ok = hmac.compare_digest(form.password.data, password)
+        else:
+            pass_ok = bool(password_hash) and check_password_hash(password_hash, form.password.data)
         if user_ok and pass_ok:
             session.clear(); session["admin_authenticated"] = True; session.permanent = True
             return redirect(url_for("main.admin"))
