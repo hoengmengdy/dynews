@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% from '_cards.html' import cards %}
-{% from '_ads.html' import banner_468, skyscraper_tall, skyscraper_short, native %}
 {% block content %}
 <section class="hero container py-5">
   <div class="section-kicker">Today's briefing</div>
@@ -8,8 +7,8 @@
   <p>Clear, current headlines from NBC News—collected in one calm place.</p>
 </section>
 <div class="container pb-5">
-  <div class="row g-4 news-layout">
-    <div class="col-12 col-lg-9">
+  <div class="row news-layout">
+    <div class="col-12 col-xl-10 mx-auto">
       {% if featured %}
       <section class="mb-5">
         <div class="section-heading"><span>Featured</span></div>
@@ -19,19 +18,11 @@
         </article>
       </section>
       {% endif %}
-      <div class="ad-break ad-break-banner">{{ banner_468() }}</div>
-      <div class="ad-break-native">{{ native() }}</div>
       <section>
         <div class="section-heading d-flex justify-content-between"><span>Latest News</span><a href="{{ url_for('main.latest') }}">View all →</a></div>
         {{ cards(articles) }}
       </section>
     </div>
-    <aside class="col-12 col-lg-3 ad-sidebar" aria-label="Sidebar advertisements">
-      <div class="ad-sidebar-inner">
-        {{ skyscraper_short() }}
-        {{ skyscraper_tall() }}
-      </div>
-    </aside>
   </div>
 </div>
 {% endblock %}

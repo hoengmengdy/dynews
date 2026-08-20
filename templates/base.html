@@ -28,30 +28,7 @@
     </ul><form class="d-flex" action="{{ url_for('main.search') }}"><label class="visually-hidden" for="nav-search">Search</label><input id="nav-search" class="form-control" type="search" name="q" placeholder="Search stories…" value="{{ request.args.get('q','') }}"></form></div>
   </nav>
 </header>
-{% from '_ads.html' import banner_728, banner_320, sponsored %}
-{% if not request.path.startswith('/admin') %}
-<div class="container ad-slot-top">{{ banner_728() }}</div>
-<div class="container ad-slot-top ad-slot-top-mobile">{{ banner_320() }}</div>
-{% endif %}
 <main>{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="container mt-3">{% for cat,msg in messages %}<div class="alert alert-{{ cat }}">{{ msg }}</div>{% endfor %}</div>{% endif %}{% endwith %}{% block content %}{% endblock %}</main>
-{% if not request.path.startswith('/admin') %}<div class="container ad-slot-bottom">{{ sponsored() }}</div>{% endif %}
-{% if not request.path.startswith('/admin') %}
-<div id="clickAdOverlay" class="click-ad-overlay" data-ad-enabled="true" role="dialog" aria-modal="true" aria-label="Advertisement" aria-hidden="true" hidden>
-  <div class="click-ad-panel" role="document">
-    <button id="clickAdClose" class="click-ad-close" type="button" aria-label="Close advertisement">×</button>
-    <div class="click-ad-content">
-      <!-- PASTE INTERSTITIAL / POPUP AD NETWORK CODE HERE -->
-    </div>
-  </div>
-</div>
-<div id="bottomAd" class="bottom-ad" data-ad-enabled="false" aria-hidden="true" hidden>
-  <button id="bottomAdClose" class="bottom-ad-close" type="button" aria-label="Close advertisement">×</button>
-  <div class="bottom-ad-content">
-    <!-- PASTE NEW STICKY AD CODE HERE -->
-  </div>
-</div>
-{% endif %}
 <footer class="mt-5 py-5"><div class="container d-md-flex justify-content-between"><div><div class="navbar-brand"><span>Dy</span> News</div><p class="text-secondary mt-2">Headlines sourced from NBC News RSS feeds.</p></div><div><a href="{{ url_for('main.latest') }}">Latest</a> · <a href="{{ url_for('main.sitemap') }}">Sitemap</a> · <a href="{{ url_for('main.admin_login') }}">Admin</a></div></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="{{ url_for('static', filename='js/app.js') }}"></script>
-{% if not request.path.startswith('/admin') %}<script src="https://pl30888466.effectivecpmnetwork.com/78/9f/c3/789fc3f3e9606d49e0c159c0a9d4c887.js"></script><script src="https://pl30888472.effectivecpmnetwork.com/ed/e6/ab/ede6abb50f597c913c95a1979bac651e.js"></script>{% endif %}
 </body></html>
