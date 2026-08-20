@@ -96,7 +96,7 @@ class AppTests(unittest.TestCase):
         self.assertIn(b"Newsroom admin", response.data)
 
     def test_vercel_uses_a_valid_postgres_database_url(self):
-        with patch.dict(os.environ, {"VERCEL": "1", "DATABASE_URL": "postgres://user:pass@db.example/news"}):
+        with patch.dict(os.environ, {"VERCEL": "1", "DATABASE_URL": "postgres://user:pass@db.example/news", "ENABLE_PERSISTENT_DATABASE": "true"}):
             from config import database_url
             self.assertEqual(database_url(), "postgresql://user:pass@db.example/news")
 

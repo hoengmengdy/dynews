@@ -36,7 +36,8 @@ def database_url():
     """Select a database URL that is safe for the current runtime."""
     configured_url = env_value("DATABASE_URL", "")
     if os.getenv("VERCEL"):
-        if configured_url.startswith(("postgresql://", "postgres://")):
+        persistent_enabled = env_value("ENABLE_PERSISTENT_DATABASE", "false").lower() == "true"
+        if persistent_enabled and configured_url.startswith(("postgresql://", "postgres://")):
             return configured_url.replace("postgres://", "postgresql://", 1)
         return default_database_url()
     return (configured_url or default_database_url()).replace("postgres://", "postgresql://", 1)
