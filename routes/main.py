@@ -47,6 +47,12 @@ def relative_time(value):
 @main.route("/")
 def index():
     articles = Article.query.order_by(Article.published_at.desc().nullslast(), Article.id.desc()).limit(13).all()
+    if not articles and current_app.config["SQLALCHEMY_DATABASE_URI"] == "sqlite://":
+        try:
+            fetch_and_store_news(force=True)
+            articles = Article.query.order_by(Article.published_at.desc().nullslast(), Article.id.desc()).limit(13).all()
+        except Exception:
+            current_app.logger.exception("Automatic RSS import failed")
     return render_template("index.html", featured=articles[0] if articles else None, articles=articles[1:])
 
 @main.route("/latest")

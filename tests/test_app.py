@@ -73,6 +73,15 @@ class AppTests(unittest.TestCase):
         self.assertIn(b"site-ad-inline", response.data)
         self.assertIn(b"site-ad-rail", response.data)
 
+    def test_empty_ephemeral_home_triggers_an_rss_import(self):
+        Article.query.delete()
+        db.session.commit()
+        self.app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
+        with patch("routes.main.fetch_and_store_news") as importer:
+            response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        importer.assert_called_once_with(force=True)
+
     def test_api(self):
         for url in ["/api/news", "/api/news/latest", "/api/news/1", "/api/categories", "/api/search?q=World"]:
             self.assertEqual(self.client.get(url).status_code, 200, url)
