@@ -34,9 +34,12 @@ def default_database_url():
 
 def database_url():
     """Select a database URL that is safe for the current runtime."""
+    configured_url = env_value("DATABASE_URL", "")
     if os.getenv("VERCEL"):
+        if configured_url.startswith(("postgresql://", "postgres://")):
+            return configured_url.replace("postgres://", "postgresql://", 1)
         return default_database_url()
-    return env_value("DATABASE_URL", default_database_url()).replace("postgres://", "postgresql://", 1)
+    return (configured_url or default_database_url()).replace("postgres://", "postgresql://", 1)
 
 class Config:
     SECRET_KEY = env_value("SECRET_KEY", "dev-only-change-me")

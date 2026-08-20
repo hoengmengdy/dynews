@@ -1,4 +1,5 @@
 import unittest
+import os
 from pathlib import Path
 from unittest.mock import Mock, patch
 from app import create_app
@@ -93,5 +94,15 @@ class AppTests(unittest.TestCase):
             follow_redirects=True,
         )
         self.assertIn(b"Newsroom admin", response.data)
+
+    def test_vercel_uses_a_valid_postgres_database_url(self):
+        with patch.dict(os.environ, {"VERCEL": "1", "DATABASE_URL": "postgres://user:pass@db.example/news"}):
+            from config import database_url
+            self.assertEqual(database_url(), "postgresql://user:pass@db.example/news")
+
+    def test_vercel_ignores_an_invalid_database_placeholder(self):
+        with patch.dict(os.environ, {"VERCEL": "1", "DATABASE_URL": "<database-url>"}):
+            from config import database_url
+            self.assertEqual(database_url(), "sqlite://")
 
 if __name__ == "__main__": unittest.main()
