@@ -37,6 +37,13 @@
 </div>
 {% endif %}
 <main>{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="container mt-3">{% for cat,msg in messages %}<div class="alert alert-{{ cat }}">{{ msg }}</div>{% endfor %}</div>{% endif %}{% endwith %}{% block content %}{% endblock %}</main>
+{% if not request.path.startswith('/admin') %}
+<div class="container site-ad site-ad-footer" aria-label="Advertisement">
+  <span class="ad-label">Advertisement</span>
+  <div class="ad-desktop">{{ banner_728() }}</div>
+  <div class="ad-mobile">{{ banner_320() }}</div>
+</div>
+{% endif %}
 <footer class="mt-5 py-5"><div class="container d-md-flex justify-content-between"><div><div class="navbar-brand"><span>Dy</span> News</div><p class="text-secondary mt-2">Headlines sourced from NBC News RSS feeds.</p></div><div><a href="{{ url_for('main.latest') }}">Latest</a> · <a href="{{ url_for('main.sitemap') }}">Sitemap</a> · <a href="{{ url_for('main.admin_login') }}">Admin</a></div></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body></html>

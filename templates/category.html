@@ -1,2 +1,13 @@
-{% extends 'base.html' %}{% from '_cards.html' import cards %}{% block title %}{{ title }} | Dy News{% endblock %}
-{% block content %}<section class="container py-5"><div class="section-kicker">Browse coverage</div><h1 class="page-title">{{ title }}</h1>{{ cards(pagination.items) }}{% include '_pagination.html' %}</section>{% endblock %}
+{% extends 'base.html' %}
+{% from '_cards.html' import cards %}
+{% from '_ads.html' import banner_468, native %}
+{% block title %}{{ title }} | Dy News{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="section-kicker">Browse coverage</div><h1 class="page-title">{{ title }}</h1>
+  <div class="site-ad site-ad-inline"><span class="ad-label">Advertisement</span>{{ banner_468() }}</div>
+  {{ cards(pagination.items) }}
+  {% include '_pagination.html' %}
+  <div class="site-ad site-ad-native"><span class="ad-label">Sponsored</span>{{ native() }}</div>
+</section>
+{% endblock %}
