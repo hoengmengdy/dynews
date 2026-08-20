@@ -24,9 +24,11 @@ NEWS_SOURCES = {
 
 
 def default_database_url():
-    """Use Vercel's writable temp directory when no external database is set."""
+    """Use an ephemeral database on Vercel when no external database is set."""
     if os.getenv("VERCEL"):
-        return "sqlite:////tmp/news.db"
+        # An in-memory database avoids writes to Vercel's read-only deployment
+        # filesystem. Production deployments should provide DATABASE_URL.
+        return "sqlite://"
     return "sqlite:///news.db"
 
 class Config:
